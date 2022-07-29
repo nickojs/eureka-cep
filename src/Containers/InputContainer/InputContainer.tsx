@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import { Button, Card, CardContent } from '@mui/material';
-import CEPInput from '../components/CEPInput/CEPInput';
-import api from '../services/api';
+import CEPInput from '../../components/CEPInput/CEPInput';
+import api from '../../services/api';
 
 export default () => {
   const [value, setValue] = useState('');
