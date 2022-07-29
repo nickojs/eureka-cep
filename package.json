@@ -73,6 +73,7 @@
     "@types/axios": "^0.14.0",
     "babel-plugin-named-exports-order": "^0.0.2",
     "cz-conventional-changelog": "3.3.0",
+    "msw": "^0.44.2",
     "prop-types": "^15.8.1",
     "webpack": "^5.74.0"
   },
@@ -80,5 +81,8 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
+  },
+  "msw": {
+    "workerDirectory": "public"
   }
 }
