@@ -5,6 +5,8 @@ export interface AddressProps {
   data: ViaCepResponse | null;
   loading: boolean;
   error: string;
+  staticMap: string; // I think it's a base64
+  setMap: (state: string) => void;
   setError: (error: string) => void;
   setLoading: (state: boolean) => void;
   setData: (data: ViaCepResponse) => void;
@@ -18,6 +20,7 @@ const AddressContext = React.createContext<AddressProps>(
 export const AddressProvider = ({ children }: { children: React.ReactNode }) => {
   const [data, setData] = useState<ViaCepResponse | null>(null);
   const [loading, setLoading] = useState(false);
+  const [staticMap, setStaticMap] = useState('');
   const [error, setError] = useState('');
 
   const setDataHandler = useCallback((receivingData: ViaCepResponse) => {
@@ -32,10 +35,15 @@ export const AddressProvider = ({ children }: { children: React.ReactNode }) => 
     setError(state);
   }, []);
 
+  const setStaticMapHandler = useCallback((state: string) => {
+    setStaticMap(state);
+  }, []);
+
   const resetHandler = useCallback(() => {
     setData(null);
     setLoading(false);
     setError('');
+    setStaticMap('');
   }, []);
 
   return (
@@ -45,10 +53,12 @@ export const AddressProvider = ({ children }: { children: React.ReactNode }) => 
         data,
         loading,
         error,
+        staticMap,
         setLoading: setLoadingHandler,
         setError: setErrorHandler,
         setData: setDataHandler,
-        resetApp: resetHandler
+        resetApp: resetHandler,
+        setMap: setStaticMapHandler
       }}
     >
       {children}
