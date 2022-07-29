@@ -14,7 +14,7 @@ export default (props: ViaCepResponse) => {
   } = props;
 
   return (
-    <Card sx={{ maxWidth: 420 }}>
+    <Card sx={{ width: 420 }}>
       <CardMedia
         component="img"
         alt="placeholder image"

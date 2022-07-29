@@ -27,6 +27,6 @@ export default ({ onChange, value }: InputProps) => (
     value={value}
     onChange={onChange}
     inputComponent={ParsedCEP as any}
-    style={{ maxWidth: 100 }}
+    style={{ maxWidth: 160 }}
   />
 );
