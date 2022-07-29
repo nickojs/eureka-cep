@@ -1,7 +1,5 @@
-export default () => {
-  return (
-    <div>
-      <p>Hello!</p>
-    </div>
-  );
-}
+export default () => (
+  <div>
+    <p>Init app</p>
+  </div>
+);
