@@ -1,14 +1,18 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Card, CardContent } from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
 import useAddress from '../../context/AddressContext';
 import CEPInput from '../../components/CEPInput/CEPInput';
-import api from '../../services/api';
+import { getCepAPi } from '../../services/api';
 import { ViaCepResponse } from '../../interfaces';
+
+const isCEPValid = (value: string) => value.replace(/-/g, '').length === 8;
 
 export default () => {
   const [value, setValue] = useState('');
-  const { setData, setLoading, loading } = useAddress();
+  const {
+    setData, setLoading, setError, error, loading
+  } = useAddress();
 
   const inputHandler = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const input = e.target.value;
@@ -18,16 +22,23 @@ export default () => {
   const fetchApi = useCallback(async (val: string) => {
     try {
       setLoading(true);
-      const request = await api(val);
+      const request = await getCepAPi(val);
       const { data: requestData } = request;
+      if (requestData.erro) {
+        return setError('Não foi possível acessar esse CEP');
+      }
       setData(requestData as ViaCepResponse);
       return request;
-    } catch (error) {
-      throw new Error('fetchApi error');
+    } catch (err) {
+      return setError('Não foi possível acessar esse CEP');
     } finally {
       setLoading(false);
     }
   }, []);
+
+  useEffect(() => {
+    if (error.length > 0) setValue('');
+  }, [error]);
 
   return (
     <Card style={{ maxWidth: 420, justifyContent: 'space-around' }}>
@@ -38,7 +49,7 @@ export default () => {
         />
         <LoadingButton
           onClick={() => fetchApi(value)}
-          disabled={loading || !value}
+          disabled={loading || !value || !isCEPValid(value)}
           loading={loading}
           loadingIndicator="Pesquisando…"
           variant="contained"
