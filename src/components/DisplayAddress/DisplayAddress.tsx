@@ -13,22 +13,18 @@ export default (props: ViaCepResponse) => {
     localidade: cidade
   } = props;
 
+  const title = complemento ? `${logradouro}, ${complemento}` : logradouro;
+
   return (
     <Card sx={{ width: 420 }}>
       <CardMedia
         component="img"
         alt="placeholder image"
         height="200"
-        // eslint-disable-next-line global-require
-        image={require('../../../mocks/address-placeholder.jpg')}
+        image="https://developers.google.com/maps/images/landing/hero_maps_static_api.png"
       />
       <CardContent>
-        <Typography variant="h5" gutterBottom>
-          {logradouro}
-          ,
-          {' '}
-          {complemento}
-        </Typography>
+        <Typography variant="h5" gutterBottom>{title}</Typography>
         <Typography variant="body2">{bairro}</Typography>
         <Typography variant="body2">
           {cidade}
