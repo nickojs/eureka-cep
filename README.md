@@ -11,8 +11,12 @@ Não quis me aprofundar, ou melhor, tornar complexas as requisições feitas no 
 ## Rodando o projeto
 Você pode acessar o projeto [nessa URL](https://eureka-cep.netlify.app/) ou simplesmente clonar este repo e rodar um ```yarn``` para instalar as dependências seguido de um ```yarn start``` para iniciar o servidor de desenvolvimento.
 
+
 ## Storybook
 Para acessar o dashboard do [Storybook](https://storybook.js.org/) desse projeto, após instalar as dependências, basta rodar ```yarn run storybook``` e acessar em ```localhost:6006```. Note que configurei uma instância de [MSW](https://mswjs.io/) para mockar as requisições do storybook.
 
-## Sobre a API Key
+## Observações finais
+### Sobre a API Key
 Além de ter comentado no código, gostaria de ressaltar aqui que jamais utilizaria o approach de *hardcodar* uma API Key, muito menos usaria as .envs do React. Numa aplicação real, os dados das APIs usadas nesse projeto seriam servidos pelo backend.
+### Sobre o Favicon
+Só queria agradecer e recomendar [essa ferramenta](https://realfavicongenerator.net/).
