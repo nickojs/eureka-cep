@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from 'react';
-import { Button, Card, CardContent } from '@mui/material';
+import { Card, CardContent } from '@mui/material';
+import LoadingButton from '@mui/lab/LoadingButton';
 import useAddress from '../../context/AddressContext';
 import CEPInput from '../../components/CEPInput/CEPInput';
 import api from '../../services/api';
@@ -7,9 +8,7 @@ import { ViaCepResponse } from '../../interfaces';
 
 export default () => {
   const [value, setValue] = useState('');
-  const [loading, setLoading] = useState(false);
-
-  const { setData } = useAddress();
+  const { setData, setLoading, loading } = useAddress();
 
   const inputHandler = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const input = e.target.value;
@@ -31,20 +30,22 @@ export default () => {
   }, []);
 
   return (
-    <Card style={{ maxWidth: 320 }}>
-      <CardContent style={{ padding: '2rem' }}>
+    <Card style={{ maxWidth: 420, justifyContent: 'space-around' }}>
+      <CardContent style={{ padding: '1rem 2rem' }}>
         <CEPInput
           value={value}
           onChange={inputHandler}
         />
-        <Button
+        <LoadingButton
           onClick={() => fetchApi(value)}
           disabled={loading || !value}
+          loading={loading}
+          loadingIndicator="Pesquisando…"
           variant="contained"
-          style={{ marginLeft: '1rem' }}
+          style={{ marginLeft: '1rem', width: 140 }}
         >
           Pesquisar
-        </Button>
+        </LoadingButton>
       </CardContent>
     </Card>
   );
