@@ -4,7 +4,7 @@ import mockAddress from '../../../mocks/address';
 
 export default {
   component: DisplayAddress,
-  title: 'Display Address'
+  title: 'Components/DisplayAddress'
 } as Meta;
 
 const DisplayAddressStory: Story<any> = (args) => <DisplayAddress {...args} />;
