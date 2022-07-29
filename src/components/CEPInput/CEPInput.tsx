@@ -1,14 +1,14 @@
 /* eslint-disable react/destructuring-assignment */
-import React, { useState } from 'react';
+import React from 'react';
 import { Input } from '@mui/material';
 import { IMaskInput } from 'react-imask';
 
-interface ParsedInputProps {
+interface InputProps {
   onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
-  value: string
+  value: string;
 }
 
-const ParsedCEP = React.forwardRef<HTMLElement, ParsedInputProps>(
+const ParsedCEP = React.forwardRef<HTMLElement, InputProps>(
   (props, ref) => {
     const { onChange, ...other } = props;
     return (
@@ -21,21 +21,12 @@ const ParsedCEP = React.forwardRef<HTMLElement, ParsedInputProps>(
     );
   }
 );
-export default () => {
-  const [value, setValue] = useState('');
 
-  const inputHandler = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const input = e.target.value;
-    setValue(input);
-  };
-
-  return (
-    <div>
-      <Input
-        value={value}
-        onChange={inputHandler}
-        inputComponent={ParsedCEP as any}
-      />
-    </div>
-  );
-};
+export default ({ onChange, value }: InputProps) => (
+  <Input
+    value={value}
+    onChange={onChange}
+    inputComponent={ParsedCEP as any}
+    style={{ maxWidth: 100 }}
+  />
+);
