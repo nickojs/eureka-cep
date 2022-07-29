@@ -11,7 +11,7 @@ const isCEPValid = (value: string) => value.replace(/-/g, '').length === 8;
 export default () => {
   const [value, setValue] = useState('');
   const {
-    setData, setLoading, setError, error, loading
+    setData, setLoading, setError, resetApp, error, loading
   } = useAddress();
 
   const inputHandler = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -21,6 +21,7 @@ export default () => {
 
   const fetchApi = useCallback(async (val: string) => {
     try {
+      resetApp();
       setLoading(true);
       const request = await getCepAPi(val);
       const { data: requestData } = request;
@@ -41,7 +42,7 @@ export default () => {
   }, [error]);
 
   return (
-    <Card style={{ maxWidth: 420, justifyContent: 'space-around' }}>
+    <Card style={{ width: 420, justifyContent: 'space-around' }}>
       <CardContent style={{ padding: '1rem 2rem' }}>
         <CEPInput
           value={value}
@@ -49,11 +50,11 @@ export default () => {
         />
         <LoadingButton
           onClick={() => fetchApi(value)}
-          disabled={loading || !value || !isCEPValid(value)}
+          disabled={loading || !value || !isCEPValid(value) || !!error}
           loading={loading}
-          loadingIndicator="Pesquisando…"
+          loadingIndicator="..."
           variant="contained"
-          style={{ marginLeft: '1rem', width: 140 }}
+          style={{ marginLeft: '1rem', maxWidth: 140 }}
         >
           Pesquisar
         </LoadingButton>

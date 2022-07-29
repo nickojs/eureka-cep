@@ -10,7 +10,7 @@ interface ErrorCardProps {
 }
 
 export default ({ msg, reset }: ErrorCardProps) => (
-  <Card sx={{ maxWidth: 420 }}>
+  <Card sx={{ width: 420 }}>
     <CardContent>
       <Box
         style={{

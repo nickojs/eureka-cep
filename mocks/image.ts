@@ -1,0 +1,1 @@
+export default 'https://maps.geoapify.com/v1/staticmap?apiKey=ae0b16e9aeaf4d5ca08383c8d4c667cd&style=osm-bright&width=400&height=400&format=jpeg&zoom=15&center=lonlat:-46.63267,-23.54385&marker=lonlat:-46.63267,-23.54385%3Bcolor:%23ff0000%3Bsize:medium';

@@ -1,28 +1,47 @@
 import {
-  Button,
- Card, CardActions, CardContent, CardMedia, Typography
+  Card,
+  CardContent,
+  CardMedia,
+  Typography
 } from '@mui/material';
+import LinearProgress from '@mui/material/LinearProgress';
+import { Box } from '@mui/system';
 import { ViaCepResponse } from '../../interfaces';
 
-export default (props: ViaCepResponse) => {
+interface DisplayAddressProps {
+  data: ViaCepResponse;
+  map: string;
+}
+
+export default (props: DisplayAddressProps) => {
+  const { data, map } = props;
   const {
     logradouro,
     complemento,
     bairro,
     uf: estado,
     localidade: cidade
-  } = props;
+  } = data;
 
   const title = complemento ? `${logradouro}, ${complemento}` : logradouro;
 
   return (
     <Card sx={{ width: 420 }}>
-      <CardMedia
-        component="img"
-        alt="placeholder image"
-        height="200"
-        image="https://developers.google.com/maps/images/landing/hero_maps_static_api.png"
-      />
+      <>
+        {!map && (
+          <Box sx={{ minHeight: 200 }}>
+            <LinearProgress />
+          </Box>
+        )}
+        {map && (
+          <CardMedia
+            component="img"
+            alt="map of region"
+            height="200"
+            image={map}
+          />
+        )}
+      </>
       <CardContent>
         <Typography variant="h5" gutterBottom>{title}</Typography>
         <Typography variant="body2">{bairro}</Typography>
@@ -34,15 +53,6 @@ export default (props: ViaCepResponse) => {
           {estado}
         </Typography>
       </CardContent>
-      <CardActions>
-        <Button
-          size="small"
-          color="primary"
-          variant="text"
-        >
-          See in maps
-        </Button>
-      </CardActions>
     </Card>
   );
 };
